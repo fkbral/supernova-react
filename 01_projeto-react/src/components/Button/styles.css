@@ -1,0 +1,16 @@
+.btn {
+  background-color: steelblue;
+  padding: 0.6rem 2.4rem;
+  border: none;
+  color: #fff;
+  border-radius: .4rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .4rem;
+}
+
+.btn + .btn {
+  margin-top: .6rem;
+}
