@@ -13,11 +13,30 @@ export const Button = ({
   children,
   ...rest
 }: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) => {
+  // if (IconLeft) {
+  //   return (
+  //     <button className="btn" {...rest}>
+  //       <IconLeft />
+  //       <p>{children}</p>
+  //     </button>
+  //   )
+  // }
+
+  // if (IconRight) {
+  //   return (
+  //     <button className="btn" {...rest}>
+  //       <p>{children}</p>
+  //       <IconRight />
+  //     </button>
+  //   )
+  // }
+
   return (
     <button className="btn" {...rest}>
-      {IconLeft ? <IconLeft /> : ""}
+      {/* renderização condicional */}
+      {IconLeft && <IconLeft />}
       <p>{children}</p>
-      {IconRight ? <IconRight /> : ""}
+      {IconRight && <IconRight />}
     </button>
   );
 };

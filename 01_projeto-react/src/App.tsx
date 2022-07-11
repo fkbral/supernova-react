@@ -1,10 +1,11 @@
+import { AttendanceList } from "./components/AttendanceList";
 import { Button } from "./components/Button";
 import { UserProfile } from "./components/UserProfile";
 import { BikeIcon, UserIcon } from "./utils/icons";
 
 export function App() {
   return (
-    <div className="App">
+    <div>
       <h1>Hello world</h1>
       <h2>{"Hello Supernova!".toUpperCase()}</h2>
 
@@ -15,6 +16,8 @@ export function App() {
       <Button IconRight={BikeIcon}>alugue uma bike</Button>
 
       <Button type="submit">enviar</Button>
+
+      <AttendanceList />
 
       {/* <button className="btn">qualquer coisa</button> */}
     </div>
