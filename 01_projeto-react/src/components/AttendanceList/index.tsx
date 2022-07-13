@@ -1,4 +1,4 @@
-import { Student } from '../../types/Student'
+import { Student } from '../../application/types/Student'
 import './styles.css'
 
 export const AttendanceList = () => {

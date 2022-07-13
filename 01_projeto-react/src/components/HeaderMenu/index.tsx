@@ -15,6 +15,10 @@ export const HeaderMenu = () => {
         <li>
           <Link to="/shopping-cart">Lista de compras</Link>
         </li>
+
+        <li>
+          <Link to="/forecast">Previsão do tempo para uma cidade</Link>
+        </li>
       </ul>
     </nav>
   )

@@ -1,7 +1,8 @@
-import { ShoppingItem } from '../../types/ShoppingList'
+import { ShoppingItem } from '../../application/types/ShoppingList'
 import { v4 as uuid } from 'uuid'
 import { Button } from '../../components/Button'
 import { useState } from 'react'
+import * as S from './styles'
 
 const ShoppingList = () => {
   // const objetoHash = new Map()
@@ -13,6 +14,7 @@ const ShoppingList = () => {
 
   const amountTypeInPortuguese: Record<ShoppingItem['amountType'], string> = {
     kg: 'kg',
+    L: 'L',
     dozen: 'dúzia(s)',
     unity: 'unidade(s)',
   }
@@ -22,6 +24,10 @@ const ShoppingList = () => {
       {
         label: 'kg',
         value: 'kg',
+      },
+      {
+        label: 'L',
+        value: 'L',
       },
       {
         label: 'dúzia(s)',
@@ -57,9 +63,9 @@ const ShoppingList = () => {
 
   // const shoppingList = initialShoppingList
 
-  const [itemName, setItemName] = useState('')
-  const [itemAmount, setItemAmount] = useState(1)
-  const [itemAmountType, setItemAmountType] =
+  const [itemNameInput, setItemNameInput] = useState('')
+  const [itemAmountInput, setItemAmountInput] = useState('1')
+  const [itemAmountTypeInput, setItemAmountTypeInput] =
     useState<ShoppingItem['amountType']>('unity')
 
   function handleAddShoppingItemToList(
@@ -68,9 +74,9 @@ const ShoppingList = () => {
     event.preventDefault()
 
     const newShoppingItem: ShoppingItem = {
-      name: itemName,
-      amount: itemAmount,
-      amountType: itemAmountType,
+      name: itemNameInput,
+      amount: parseFloat(itemAmountInput),
+      amountType: itemAmountTypeInput,
     }
 
     // errado: não está sinalizando ao react que devemos fazer re-render
@@ -88,7 +94,7 @@ const ShoppingList = () => {
     //   return newShoppingList
     // })
 
-    setItemName('')
+    setItemNameInput('')
   }
 
   return (
@@ -100,24 +106,24 @@ const ShoppingList = () => {
         <input
           type="text"
           id="shopping-item-name"
-          value={itemName}
-          onChange={e => setItemName(e.target.value)}
+          value={itemNameInput}
+          onChange={e => setItemNameInput(e.target.value)}
         />
 
         <label htmlFor="shopping-item-amount">Quantidade</label>
         <input
-          type="text"
+          type="number"
           id="shopping-item-amount"
-          value={itemAmount}
-          onChange={e => setItemAmount(parseFloat(e.target.value))}
+          value={itemAmountInput}
+          onChange={e => setItemAmountInput(e.target.value)}
         />
 
         <label htmlFor="shopping-item-amount-type">Tipo de Quantidade</label>
         <select
           id="shopping-item-amount-type"
-          value={itemAmountType}
+          value={itemAmountTypeInput}
           onChange={e =>
-            setItemAmountType(e.target.value as ShoppingItem['amountType'])
+            setItemAmountTypeInput(e.target.value as ShoppingItem['amountType'])
           }
         >
           {/* <option>Selecione uma opção</option> */}
@@ -128,11 +134,12 @@ const ShoppingList = () => {
           ))}
         </select>
         <Button>adicionar</Button>
+        <button className="btn">adicionar</button>
       </form>
 
       <ul>
         {shoppingList.map(item => (
-          <li key={uuid()}>
+          <S.ShoppingItemLI key={uuid()} inCart={item?.inCart}>
             <p>
               <span>{item.name} - </span>
               {item.amount && (
@@ -142,7 +149,7 @@ const ShoppingList = () => {
                 </>
               )}
             </p>
-          </li>
+          </S.ShoppingItemLI>
         ))}
       </ul>
     </>

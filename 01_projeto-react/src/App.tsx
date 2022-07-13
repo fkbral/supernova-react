@@ -4,6 +4,7 @@ import { HeaderMenu } from './components/HeaderMenu'
 import Movies from './pages/movies'
 import Movie from './pages/movies/[movie_id]'
 import ShoppingList from './pages/shopping-list'
+import Forecast from './pages/forecast'
 
 export function App() {
   return (
@@ -12,18 +13,16 @@ export function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+
         <Route path="movies" element={<Movies />}>
-          {/* <Route
-            index
-            element={
-              <main>
-                <h1>404</h1>
-              </main>
-            }
-          /> */}
           <Route path=":movieId" element={<Movie />} />
         </Route>
+
+        {/* <Route path="movies/:movieId" element={<Movie />} /> */}
+
         <Route path="shopping-cart" element={<ShoppingList />} />
+
+        <Route path="forecast" element={<Forecast />} />
       </Routes>
     </BrowserRouter>
   )
