@@ -7,8 +7,13 @@ export const HeaderMenu = () => {
         <li>
           <Link to="/">home</Link>
         </li>
+
         <li>
           <Link to="/movies">filmes</Link>
+        </li>
+
+        <li>
+          <Link to="/shopping-cart">Lista de compras</Link>
         </li>
       </ul>
     </nav>

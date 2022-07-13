@@ -1,7 +1,12 @@
+import { Link, Outlet } from 'react-router-dom'
+
 type Movie = {
   id: string
   title: string
   year: number
+  runtimeInMinutes?: number
+  genres?: string[]
+  description?: string
 }
 
 const Movies = () => {
@@ -10,6 +15,10 @@ const Movies = () => {
       id: 'c67abf26-41ae-48f6-bc5b-a84f92d1fdb0',
       title: 'Toy Story',
       year: 1995,
+      runtimeInMinutes: 81,
+      genres: ['infantil', 'Comédia'],
+      description:
+        'O aniversário do garoto Andy está chegando e seus brinquedos ficam nervosos, temendo que ele ganhe novos brinquedos que possam substituí-los. Liderados pelo caubói Woody, o brinquedo predileto de Andy, eles recebem Buzz Lightyear, o boneco de um patrulheiro espacial, que logo passa a receber mais atenção do garoto. Com ciúmes, Woody tenta ensiná-lo uma lição, mas Buzz cai pela janela. É o início da aventura do caubói, que precisa resgatar Buzz para limpar sua barra com os outros brinquedos.',
     },
     {
       id: '426e8fd6-f2a6-4536-b916-b99f9c28ddd8',
@@ -42,7 +51,7 @@ const Movies = () => {
       year: 2014,
     },
     {
-      id: '28cb0078-531b-4d32-a609-fa7a69cb28e6',
+      id: 'ee8e1d9a-4747-41cb-80d1-3cbc4007646a',
       title: 'Em Ritmo de Fuga',
       year: 2017,
     },
@@ -64,10 +73,13 @@ const Movies = () => {
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>
-            <strong>{movie.title}</strong> - <span>{movie.year}</span>
+            <Link to={`${movie.id}`}>
+              <strong>{movie.title}</strong> - <span>{movie.year}</span>
+            </Link>
           </li>
         ))}
       </ul>
+      <Outlet />
     </>
   )
 }
