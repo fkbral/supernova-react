@@ -4,6 +4,8 @@ import { Button } from '../../components/Button'
 import { LoadingSpinner } from '../../components/LoadingSpinner'
 import { SearchIcon } from '../../utils/icons'
 
+type PropsType = {}
+
 type ForecastClassComponentState = {
   cityName: string
   isLoading: boolean
@@ -12,10 +14,13 @@ type ForecastClassComponentState = {
   cityNameToSearch: string
 }
 
-class ForecastClassComponent extends React.Component {
+class ForecastClassComponent extends React.Component<
+  PropsType,
+  ForecastClassComponentState
+> {
   public cityNameInputRef: RefObject<HTMLInputElement> | null = null
 
-  constructor(props: any) {
+  constructor(props: PropsType) {
     super(props)
 
     this.state = {
@@ -24,17 +29,22 @@ class ForecastClassComponent extends React.Component {
       cityForecast: null,
       cityNameInputValue: '',
       cityNameToSearch: 'Brasilia',
-    } as ForecastClassComponentState
+    }
 
     this.cityNameInputRef = React.createRef()
+    this.handleSearchCityWeather = this.handleSearchCityWeather.bind(this)
   }
 
   handleSearchCityWeather(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
+    if (!this.cityNameInputRef?.current?.value) {
+      return
+    }
+
     this.setState(previousState => ({
       ...previousState,
-      cityName: this.cityNameInputRef?.current?.value,
+      cityName: this.cityNameInputRef?.current?.value as string,
     }))
   }
 
@@ -66,7 +76,7 @@ class ForecastClassComponent extends React.Component {
   }
 
   componentDidUpdate(
-    _previousProps,
+    _previousProps: PropsType,
     previousState: ForecastClassComponentState
   ) {
     if (previousState.cityName !== this.state.cityName) {
