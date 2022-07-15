@@ -5,6 +5,7 @@ import Movies from './pages/movies'
 import Movie from './pages/movies/[movie_id]'
 import ShoppingList from './pages/shopping-list'
 import Forecast from './pages/forecast'
+import ForecastClassComponent from './pages/forecast-class-component'
 
 export function App() {
   return (
@@ -23,6 +24,11 @@ export function App() {
         <Route path="shopping-cart" element={<ShoppingList />} />
 
         <Route path="forecast" element={<Forecast />} />
+
+        <Route
+          path="forecast-class-component"
+          element={<ForecastClassComponent />}
+        />
       </Routes>
     </BrowserRouter>
   )

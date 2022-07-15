@@ -1,8 +1,9 @@
-import { 
+export {
   FaUser as UserIcon,
-  FaBicycle as BikeIcon
+  FaBicycle as BikeIcon,
+  FaSearch as SearchIcon,
+  FaSpinner as LoadingIcon,
 } from 'react-icons/fa'
-import { IconType as Icon } from 'react-icons/lib'
 
-export { UserIcon, BikeIcon }
+import { IconType as Icon } from 'react-icons/lib'
 export type { Icon }

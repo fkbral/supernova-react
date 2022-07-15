@@ -19,6 +19,12 @@ export const HeaderMenu = () => {
         <li>
           <Link to="/forecast">Previsão do tempo para uma cidade</Link>
         </li>
+
+        <li>
+          <Link to="/forecast-class-component">
+            Previsão do tempo para uma cidade usando componente de classe
+          </Link>
+        </li>
       </ul>
     </nav>
   )
