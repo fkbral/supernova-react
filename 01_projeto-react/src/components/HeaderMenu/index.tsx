@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../application/hooks/useAuth'
+import { SignOutIcon } from '../../utils/icons'
 
 export const HeaderMenu = () => {
+  const { userProfile, signOut } = useAuth()
+
   return (
     <nav>
       <ul>
@@ -25,6 +29,20 @@ export const HeaderMenu = () => {
             Previsão do tempo para uma cidade usando componente de classe
           </Link>
         </li>
+
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+
+        {userProfile && (
+          <>
+            <h1>Bem-vindo {userProfile.name}</h1>
+
+            <button onClick={signOut}>
+              <SignOutIcon />
+            </button>
+          </>
+        )}
       </ul>
     </nav>
   )
