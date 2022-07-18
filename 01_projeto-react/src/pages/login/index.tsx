@@ -27,7 +27,7 @@ const Login = () => {
   }
 
   return (
-    <S.LoginForm customTheme={customTheme} onSubmit={handleSignIn}>
+    <S.LoginForm onSubmit={handleSignIn}>
       <label htmlFor="user-email">Seu email</label>
       <input
         placeholder="fulano@gmail.com"

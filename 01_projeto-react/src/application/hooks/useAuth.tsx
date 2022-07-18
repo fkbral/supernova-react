@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import { createContext, ReactNode, useContext, useMemo, useState } from 'react'
 import { userProfileMocks } from '../../__tests__/mocks/userProfileMocks'
 import { UserProfile } from '../types/UserProfile'
 
@@ -22,12 +22,32 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
+  // const signOut = useCallback(() => {
+  //   setUserProfile(null)
+  // }, [setUserProfile])
+
   function signOut() {
     setUserProfile(null)
   }
 
+  const soma = (numero1: number, numero2: number) => numero1 + numero2
+  const num1 = 10
+  const num2 = 20
+  const somaMemoized = useMemo(() => soma(num1, num2), [num1, num2])
+
+  const authContextValue = useMemo(
+    function () {
+      return {
+        userProfile,
+        signIn,
+        signOut,
+      }
+    },
+    [userProfile, signIn, signOut]
+  )
+
   return (
-    <AuthContext.Provider value={{ userProfile, signIn, signOut }}>
+    <AuthContext.Provider value={authContextValue}>
       {children}
     </AuthContext.Provider>
   )
