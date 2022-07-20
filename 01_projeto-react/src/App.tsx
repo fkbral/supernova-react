@@ -11,6 +11,7 @@ import { AuthProvider } from './application/hooks/useAuth'
 import { ThemeProvider } from 'styled-components'
 import { darkTheme, lightTheme } from './application/theme'
 import { GlobalStyles } from './global-styles'
+import { AvailableIcons } from './components/AvailableIcons'
 
 export function App() {
   return (
@@ -38,6 +39,11 @@ export function App() {
             />
 
             <Route path="login" element={<Login />}></Route>
+
+            <Route
+              path="icon-favorites-picker"
+              element={<AvailableIcons />}
+            ></Route>
           </Routes>
         </BrowserRouter>
       </AuthProvider>

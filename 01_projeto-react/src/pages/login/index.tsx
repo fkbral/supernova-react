@@ -1,10 +1,13 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useAuth } from '../../application/hooks/useAuth'
 import { Button } from '../../components/Button'
 import * as S from './styles'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  const { signIn } = useAuth()
+  const { signIn, userProfile } = useAuth()
+  const navigate = useNavigate()
+
   const customTheme = {
     fontFamily: {},
     colors: {
@@ -15,6 +18,14 @@ const Login = () => {
 
   const userEmailRef = useRef<HTMLInputElement>(null)
   const userPasswordRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (!userProfile) {
+      return
+    }
+
+    navigate('/')
+  }, [userProfile])
 
   function handleSignIn(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()

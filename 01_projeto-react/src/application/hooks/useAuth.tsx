@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react'
 import { userProfileMocks } from '../../__tests__/mocks/userProfileMocks'
+import { LOCAL_STORAGE_KEYS } from '../constants'
 import { UserProfile } from '../types/UserProfile'
 
 type AuthContextProps = {
@@ -12,13 +13,24 @@ type AuthContextProps = {
 const AuthContext = createContext<AuthContextProps | null>(null)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(
+    localStorage.getItem(LOCAL_STORAGE_KEYS.USER_PROFILE)
+      ? JSON.parse(
+          localStorage.getItem(LOCAL_STORAGE_KEYS.USER_PROFILE) as string
+        )
+      : null
+  )
 
   function signIn(email: string, password: string) {
     const user = userProfileMocks.find(findUser => findUser.email === email)
 
     if (user) {
       setUserProfile(user)
+
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.USER_PROFILE,
+        JSON.stringify(user)
+      )
     }
   }
 
@@ -28,6 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   function signOut() {
     setUserProfile(null)
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.USER_PROFILE)
   }
 
   const soma = (numero1: number, numero2: number) => numero1 + numero2

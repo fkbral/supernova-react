@@ -4,6 +4,10 @@ export {
   FaSearch as SearchIcon,
   FaSpinner as LoadingIcon,
   FaSignOutAlt as SignOutIcon,
+  FaThumbsUp as ThumbsIcon,
+  FaPlayCircle as PlayCircleIcon,
+  FaCloud as CloudIcon,
+  FaPause as PauseIcon,
 } from 'react-icons/fa'
 
 import { IconType as Icon } from 'react-icons/lib'
