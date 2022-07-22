@@ -40,6 +40,14 @@ export function Home() {
         <li>
           <Link to="/icon-favorites-picker">ícones favoritados</Link>
         </li>
+
+        <li>
+          <Link to="/modal-example">Exemplo de Modal</Link>
+        </li>
+
+        <li>
+          <Link to="/todo-list">Todo List</Link>
+        </li>
       </ul>
 
       <h1>Hello world</h1>

@@ -12,6 +12,8 @@ import { ThemeProvider } from 'styled-components'
 import { darkTheme, lightTheme } from './application/theme'
 import { GlobalStyles } from './global-styles'
 import { AvailableIcons } from './components/AvailableIcons'
+import { ModalExample } from './pages/modal-example'
+import { TodoList } from './components/TodoList'
 
 export function App() {
   return (
@@ -44,6 +46,10 @@ export function App() {
               path="icon-favorites-picker"
               element={<AvailableIcons />}
             ></Route>
+
+            <Route path="modal-example" element={<ModalExample />}></Route>
+
+            <Route path="todo-list" element={<TodoList />}></Route>
           </Routes>
         </BrowserRouter>
       </AuthProvider>

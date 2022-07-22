@@ -5,7 +5,8 @@ export const lightTheme = {
   colors: {
     'primary-color': 'steelblue',
     'secondary-color': 'white',
-    'background-color': '#fff',
+    'background-color': 'white',
+    'input-background': '#f3f3f3',
     'text-color': '#333',
   },
 }

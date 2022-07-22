@@ -6,6 +6,7 @@ export const darkTheme = {
     'primary-color': 'steelblue',
     'secondary-color': 'white',
     'background-color': '#333',
+    'input-background': '#ccc',
     'text-color': '#ccc',
   },
 }

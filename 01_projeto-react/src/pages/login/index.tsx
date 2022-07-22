@@ -3,18 +3,12 @@ import { useAuth } from '../../application/hooks/useAuth'
 import { Button } from '../../components/Button'
 import * as S from './styles'
 import { useNavigate } from 'react-router-dom'
+import { IconInput } from '../../components/IconInput'
+import { LockIcon, UserIcon } from '../../utils/icons'
 
 const Login = () => {
   const { signIn, userProfile } = useAuth()
   const navigate = useNavigate()
-
-  const customTheme = {
-    fontFamily: {},
-    colors: {
-      'primary-color': 'steelblue',
-      'secondary-color': 'white',
-    },
-  }
 
   const userEmailRef = useRef<HTMLInputElement>(null)
   const userPasswordRef = useRef<HTMLInputElement>(null)
@@ -39,18 +33,24 @@ const Login = () => {
 
   return (
     <S.LoginForm onSubmit={handleSignIn}>
-      <label htmlFor="user-email">Seu email</label>
-      <input
+      <IconInput
+        labelText="Seu email"
+        InputIcon={UserIcon}
         placeholder="fulano@gmail.com"
-        id="user-email"
         type="text"
         ref={userEmailRef}
       />
 
-      <label htmlFor="user-password">Sua senha</label>
-      <input
+      {/* <input
+        placeholder="fulano@gmail.com"
+        type="text"
+        ref={userEmailRef}
+      /> */}
+
+      <IconInput
+        labelText="Sua senha"
+        InputIcon={LockIcon}
         placeholder="minhasenhasecreta123@"
-        type="password"
         ref={userPasswordRef}
       />
 

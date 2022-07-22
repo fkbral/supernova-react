@@ -8,6 +8,8 @@ export {
   FaPlayCircle as PlayCircleIcon,
   FaCloud as CloudIcon,
   FaPause as PauseIcon,
+  FaLock as LockIcon,
+  FaTimes as CloseIcon,
 } from 'react-icons/fa'
 
 import { IconType as Icon } from 'react-icons/lib'
