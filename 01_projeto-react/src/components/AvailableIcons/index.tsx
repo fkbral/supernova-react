@@ -17,9 +17,9 @@ type UserStickerActionTypes = 'add' | 'subtract'
 
 export const AvailableIcons = () => {
   const [Icons, setIcons] = useState<icons.Icon[] | null>()
-  const iconToUpdate = useRef<{ icon: icons.Icon | null }>({
-    icon: null,
-  })
+  // const iconToUpdate = useRef<{ icon: icons.Icon | null }>({
+  //   icon: null,
+  // })
 
   // const [UserIcons, setUserIcons] = useState<icons.Icon[]>([])
   const [UserStickersState, stickersDispatch] = useReducer(stickersReducer, [])
@@ -38,15 +38,16 @@ export const AvailableIcons = () => {
     state: UserSticker[],
     action: UserStickerAction
   ): UserSticker[] {
-    console.log('oi')
-    if (!iconToUpdate.current?.icon) {
-      return state
-    }
+    // if (!iconToUpdate.current?.icon) {
+    //   return state
+    // }
 
-    switch (action.type) {
+    const { type, payload } = action
+
+    switch (type) {
       case 'add': {
         const findSticker = state.find(
-          sticker => sticker.Icon.name === iconToUpdate.current?.icon?.name
+          sticker => sticker.Icon.name === payload.name
         )
 
         if (findSticker) {
@@ -66,7 +67,7 @@ export const AvailableIcons = () => {
         return [
           ...state,
           {
-            Icon: iconToUpdate.current.icon,
+            Icon: payload,
             quantity: 1,
           },
         ]
@@ -74,18 +75,24 @@ export const AvailableIcons = () => {
 
       case 'subtract': {
         const isStickerInState = state.find(
-          sticker => sticker.Icon.name === iconToUpdate.current?.icon?.name
+          sticker => sticker.Icon.name === payload.name
         )
 
         if (isStickerInState && isStickerInState.quantity > 1) {
-          isStickerInState.quantity -= 1
+          const updatedState = state.map(sticker => {
+            if (sticker.Icon.name === payload.name) {
+              sticker.quantity -= 1
+            }
 
-          return [...state, isStickerInState]
+            return sticker
+          })
+
+          return updatedState
         }
 
         if (isStickerInState?.quantity === 1) {
           const filteredState = state.filter(
-            sticker => sticker.Icon.name != iconToUpdate.current?.icon?.name
+            sticker => sticker.Icon.name != payload.name
           )
 
           return filteredState
@@ -101,11 +108,11 @@ export const AvailableIcons = () => {
   }
 
   function handleAddIconToUserFavorites(Icon: icons.Icon) {
-    if (!iconToUpdate.current) {
-      return
-    }
+    // if (!iconToUpdate.current) {
+    //   return
+    // }
+    // iconToUpdate.current.icon = Icon
 
-    iconToUpdate.current.icon = Icon
     stickersDispatch({ type: 'add', payload: Icon })
     // setUserIcons(previousState => [...previousState, Icon])
   }
@@ -118,7 +125,9 @@ export const AvailableIcons = () => {
         <S.AvailableIconsUL>
           {Icons?.map(Icon => (
             <li key={Icon.name}>
-              <button onClick={() => handleAddIconToUserFavorites(Icon)}>
+              <button
+                onClick={() => stickersDispatch({ type: 'add', payload: Icon })}
+              >
                 <Icon />
               </button>
             </li>
@@ -131,7 +140,16 @@ export const AvailableIcons = () => {
             {UserStickersState?.map(({ Icon, quantity }) => (
               <li key={Icon.name}>
                 <Icon />
-                {/* <span>{quantity}</span> */}
+                <button
+                  onClick={() =>
+                    stickersDispatch({
+                      type: 'subtract',
+                      payload: Icon,
+                    })
+                  }
+                >
+                  <span>{quantity}</span>
+                </button>
               </li>
             ))}
           </S.AvailableIconsUL>
