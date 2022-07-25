@@ -13,19 +13,24 @@ export const TodoList = () => {
     ])
   }
 
-  const handleRemoveItemFromList = useCallback((id: string) => {
-    setItems(previousItems => {
-      const itemsUpdated = previousItems.filter(item => item.id !== id)
-      return itemsUpdated
-    })
-
-  }, [setItems])
+  const handleRemoveItemFromList = useCallback(
+    (id: string) => {
+      setItems(previousItems => {
+        const itemsUpdated = previousItems.filter(item => item.id !== id)
+        return itemsUpdated
+      })
+    },
+    [setItems]
+  )
 
   return (
     <section>
       <h1>Lista de Afazeres</h1>
 
-      <button onClick={() => handleAddItemToList(items.length + 1)}>
+      <button
+        onClick={() => handleAddItemToList(items.length + 1)}
+        data-testid="add-item-button"
+      >
         Adicionar Item à Lista
       </button>
 
