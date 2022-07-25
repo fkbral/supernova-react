@@ -59,8 +59,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     [userProfile, signIn, signOut]
   )
 
-  // useDebugValue({userProfile, teste: 'olá'})
-
   return (
     <AuthContext.Provider value={authContextValue}>
       {children}
@@ -74,6 +72,11 @@ export const useAuth = () => {
   if (!context) {
     throw new Error("auth provider must be used within it's provider")
   }
+
+  const { userProfile } = context
+
+  useDebugValue({userProfile, teste: 'olá'})
+  useDebugValue({avatar: userProfile?.avatarUrl})
 
   return context
 }
