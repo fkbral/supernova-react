@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useMemo, useState } from 'react'
+import { createContext, ReactNode, useContext, useMemo, useState, useDebugValue } from 'react'
 import { userProfileMocks } from '../../__tests__/mocks/userProfileMocks'
 import { LOCAL_STORAGE_KEYS } from '../constants'
 import { UserProfile } from '../types/UserProfile'
@@ -58,6 +58,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     },
     [userProfile, signIn, signOut]
   )
+
+  // useDebugValue({userProfile, teste: 'olá'})
 
   return (
     <AuthContext.Provider value={authContextValue}>

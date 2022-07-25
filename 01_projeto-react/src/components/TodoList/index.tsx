@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { TodoItem } from '../../application/types/TodoItem'
 import { TodoItemComponent } from '../TodoItem'
 import { v4 as uuid } from 'uuid'
@@ -13,6 +13,14 @@ export const TodoList = () => {
     ])
   }
 
+  const handleRemoveItemFromList = useCallback((id: string) => {
+    setItems(previousItems => {
+      const itemsUpdated = previousItems.filter(item => item.id !== id)
+      return itemsUpdated
+    })
+
+  }, [setItems])
+
   return (
     <section>
       <h1>Lista de Afazeres</h1>
@@ -23,7 +31,11 @@ export const TodoList = () => {
 
       <ul>
         {items.map(item => (
-          <TodoItemComponent key={item.id} item={item} />
+          <TodoItemComponent
+            key={item.id}
+            item={item}
+            handleRemoveItem={() => handleRemoveItemFromList(item.id)}
+          />
         ))}
       </ul>
     </section>

@@ -14,6 +14,8 @@ import { GlobalStyles } from './global-styles'
 import { AvailableIcons } from './components/AvailableIcons'
 import { ModalExample } from './pages/modal-example'
 import { TodoList } from './components/TodoList'
+import { TodoListSlow } from './components/TodoListSlow'
+import { TodoListWithInput } from './components/TodoListWithInput'
 
 export function App() {
   return (
@@ -50,6 +52,8 @@ export function App() {
             <Route path="modal-example" element={<ModalExample />}></Route>
 
             <Route path="todo-list" element={<TodoList />}></Route>
+
+            <Route path="todo-list-with-input" element={<TodoListWithInput />}></Route>
           </Routes>
         </BrowserRouter>
       </AuthProvider>

@@ -48,6 +48,10 @@ export function Home() {
         <li>
           <Link to="/todo-list">Todo List</Link>
         </li>
+
+        <li>
+          <Link to="/todo-list-with-input">Todo List com input e processamento lento</Link>
+        </li>
       </ul>
 
       <h1>Hello world</h1>

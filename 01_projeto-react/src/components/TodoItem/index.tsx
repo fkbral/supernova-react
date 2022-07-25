@@ -3,12 +3,14 @@ import { TodoItem } from '../../application/types/TodoItem'
 
 type TodoItemProps = {
   item: TodoItem
+  handleRemoveItem: () => void
 }
 
-const TodoItemBase = ({ item: { name } }: TodoItemProps) => {
+const TodoItemBase = ({ item: { name }, handleRemoveItem }: TodoItemProps) => {
   return (
     <li>
-      <p>{name}</p>
+      <span>{name}</span>
+      <button onClick={handleRemoveItem}>Remover item</button>
     </li>
   )
 }
