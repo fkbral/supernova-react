@@ -3,6 +3,7 @@ import { CityForecast } from '../../application/types/CityForecast'
 import { Button } from '../../components/Button'
 import { LoadingSpinner } from '../../components/LoadingSpinner'
 import { SearchIcon } from '../../utils/icons'
+import axios from 'axios'
 
 const Forecast = () => {
   // const [cityNameInput, setCityNameInput] = useState('')
@@ -15,11 +16,11 @@ const Forecast = () => {
     async function getWeatherData() {
       try {
         setIsLoading(true)
-        const response = await fetch(
+        const response = await axios.get(
           `https://goweather.herokuapp.com/weather/${cityName}`
         )
 
-        const cityForecastResponse: CityForecast = await response.json()
+        const cityForecastResponse: CityForecast = response.data
 
         setCityForecast(cityForecastResponse)
       } finally {
